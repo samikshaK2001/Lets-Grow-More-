@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div id="display"></div>
+            <div class="buttons">
+                <div class="button">AC</div>
+                <div class="button">CE</div>
+                <div class="button">.</div>
+                <div class="button">/</div>
+                <div class="button">7</div>
+                <div class="button">8</div>
+                <div class="button">9</div>
+                <div class="button">*</div>
+                <div class="button">4</div>
+                <div class="button">5</div>
+                <div class="button">6</div>
+                <div class="button">-</div>
+                <div class="button">1</div>
+                <div class="button">2</div>
+                <div class="button">3</div>
+                <div class="button">+</div>
+                <div class="button"></div>
+                <div class="button">0</div>
+                <div class="button"></div>
+                <div id="equal" class="button">=</div>
+            </div>
+        </div>
+    </section>
+    <script src="scriptnew.js"></script>  
+</body>
+</html>
+
+
+.container {
+    max-width: 400px;
+    margin: 10vh auto 0 auto;
+    box-shadow: 0px 0px 43px 17px rgba(236,233,233);
+    
+}
+
+#display {
+    height: 70px;
+    padding: 16px 8px;
+    text-align: right;
+    background-color: rgb(161, 125, 170);
+    font-size: 25px;
+    line-height: 70px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid rgb(161,125,111);
+    border-left: 1px solidrgb(244,248,248);
+}
+
+.buttons > div {
+    border-top :1px solid rgb(23, 26, 27) ;
+    border-right :1px solid rgb(13, 8, 8);
+}
+
+.button {
+    border: 0.5px solid rgb(124,133,73);
+    line-height: 100px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#equal {
+    background-color: rgb(1,12,11);
+    color: rgb(233,224,224);
+    
+}
+
+
+.bottom:hover {
+    background-color : #e6dee1; 
+    color : rgb(243,235,235);
+    transition : 0.5s ease-in-out;
+} 
+body {
+    background-color: #8c8c8f;
+}
+
+
+let display = document.getElementById('display');
+
+let buttons = Array.from(document.getElementsByClassName('button'));
+
+buttons.map( button => {
+    button.addEventListener('click',(e) => {
+        switch(e.target.innerText){
+            case 'AC':
+                display.innerText = '';
+                break;
+            case '=':
+                try{
+                    display.innerText = eval(display.innerText);
+                } catch{
+                    display.innerText = "Error"
+                }
+                break;
+            case 'CE':
+                if(display.innerText){
+                    display.innerText = display.innerText.slice(0,-1);
+                }
+                break;
+            default:
+                display.innerText += e.target.innerText;    
+        }
+    });
+});
